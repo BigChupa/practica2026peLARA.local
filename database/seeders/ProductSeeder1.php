@@ -10,7 +10,7 @@ class ProductSeeder1 extends Seeder
 
 public function run(): void
 {
-    $path = database_path('data/products.json');
+    $path = database_path('database/data/RAILWAY.json');
     $json = file_get_contents($path);
     $products = json_decode($json, true);
 

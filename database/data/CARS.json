@@ -1,0 +1,1199 @@
+[
+  {
+    "id": 1,
+    "make": "Toyota",
+    "model": "Camry",
+    "year": "2015",
+    "trim": "LE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 2,
+    "make": "Toyota",
+    "model": "Camry",
+    "year": "2018",
+    "trim": "LE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 3,
+    "make": "Toyota",
+    "model": "Camry",
+    "year": "2020",
+    "trim": "SE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 4,
+    "make": "Toyota",
+    "model": "Corolla",
+    "year": "2016",
+    "trim": "CE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 5,
+    "make": "Toyota",
+    "model": "Corolla",
+    "year": "2019",
+    "trim": "SE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 6,
+    "make": "Toyota",
+    "model": "Corolla",
+    "year": "2021",
+    "trim": "LE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 7,
+    "make": "Toyota",
+    "model": "RAV4",
+    "year": "2015",
+    "trim": "LE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 8,
+    "make": "Toyota",
+    "model": "RAV4",
+    "year": "2018",
+    "trim": "XLE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 9,
+    "make": "Toyota",
+    "model": "RAV4",
+    "year": "2021",
+    "trim": "LE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 10,
+    "make": "Toyota",
+    "model": "Highlander",
+    "year": "2017",
+    "trim": "LE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 11,
+    "make": "Toyota",
+    "model": "Highlander",
+    "year": "2020",
+    "trim": "XLE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 12,
+    "make": "Toyota",
+    "model": "Tacoma",
+    "year": "2016",
+    "trim": "SR",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 13,
+    "make": "Toyota",
+    "model": "Tacoma",
+    "year": "2019",
+    "trim": "SR5",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 14,
+    "make": "Toyota",
+    "model": "4Runner",
+    "year": "2015",
+    "trim": "SR5",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 15,
+    "make": "Toyota",
+    "model": "Prius",
+    "year": "2018",
+    "trim": "LE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 16,
+    "make": "Honda",
+    "model": "Accord",
+    "year": "2014",
+    "trim": "LX",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 17,
+    "make": "Honda",
+    "model": "Accord",
+    "year": "2017",
+    "trim": "EX",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 18,
+    "make": "Honda",
+    "model": "Accord",
+    "year": "2020",
+    "trim": "SE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 19,
+    "make": "Honda",
+    "model": "Civic",
+    "year": "2015",
+    "trim": "LX",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 20,
+    "make": "Honda",
+    "model": "Civic",
+    "year": "2018",
+    "trim": "EX",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 21,
+    "make": "Honda",
+    "model": "Civic",
+    "year": "2021",
+    "trim": "EX",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 22,
+    "make": "Honda",
+    "model": "CR-V",
+    "year": "2015",
+    "trim": "LX",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 23,
+    "make": "Honda",
+    "model": "CR-V",
+    "year": "2018",
+    "trim": "EX",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 24,
+    "make": "Honda",
+    "model": "CR-V",
+    "year": "2021",
+    "trim": "LE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 25,
+    "make": "Honda",
+    "model": "Pilot",
+    "year": "2016",
+    "trim": "EX",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 26,
+    "make": "Honda",
+    "model": "Pilot",
+    "year": "2019",
+    "trim": "EX-L",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 27,
+    "make": "Honda",
+    "model": "Odyssey",
+    "year": "2017",
+    "trim": "SE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 28,
+    "make": "Honda",
+    "model": "Odyssey",
+    "year": "2020",
+    "trim": "EX",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 29,
+    "make": "BMW",
+    "model": "3 Series",
+    "year": "2016",
+    "trim": "320i",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 30,
+    "make": "BMW",
+    "model": "3 Series",
+    "year": "2019",
+    "trim": "330i",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 31,
+    "make": "BMW",
+    "model": "3 Series",
+    "year": "2021",
+    "trim": "M340i",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 32,
+    "make": "BMW",
+    "model": "5 Series",
+    "year": "2015",
+    "trim": "528i",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 33,
+    "make": "BMW",
+    "model": "5 Series",
+    "year": "2018",
+    "trim": "540i",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 34,
+    "make": "BMW",
+    "model": "X3",
+    "year": "2016",
+    "trim": "xDrive28i",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 35,
+    "make": "BMW",
+    "model": "X3",
+    "year": "2019",
+    "trim": "xDrive30i",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 36,
+    "make": "BMW",
+    "model": "X5",
+    "year": "2015",
+    "trim": "xDrive35i",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 37,
+    "make": "BMW",
+    "model": "X5",
+    "year": "2018",
+    "trim": "xDrive40i",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 38,
+    "make": "BMW",
+    "model": "X5",
+    "year": "2021",
+    "trim": "xDrive40i",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 39,
+    "make": "Mercedes-Benz",
+    "model": "C-Class",
+    "year": "2015",
+    "trim": "C300",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 40,
+    "make": "Mercedes-Benz",
+    "model": "C-Class",
+    "year": "2018",
+    "trim": "C300",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 41,
+    "make": "Mercedes-Benz",
+    "model": "E-Class",
+    "year": "2016",
+    "trim": "E350",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 42,
+    "make": "Mercedes-Benz",
+    "model": "E-Class",
+    "year": "2019",
+    "trim": "E450",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 43,
+    "make": "Mercedes-Benz",
+    "model": "GLE",
+    "year": "2015",
+    "trim": "GLE350",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 44,
+    "make": "Mercedes-Benz",
+    "model": "GLE",
+    "year": "2018",
+    "trim": "GLE450",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 45,
+    "make": "Ford",
+    "model": "F-150",
+    "year": "2015",
+    "trim": "Regular Cab",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 46,
+    "make": "Ford",
+    "model": "F-150",
+    "year": "2018",
+    "trim": "SuperCrew",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 47,
+    "make": "Ford",
+    "model": "F-150",
+    "year": "2021",
+    "trim": "Crew Cab",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 48,
+    "make": "Ford",
+    "model": "Mustang",
+    "year": "2015",
+    "trim": "EcoBoost",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 49,
+    "make": "Ford",
+    "model": "Mustang",
+    "year": "2018",
+    "trim": "GT",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 50,
+    "make": "Ford",
+    "model": "Mustang",
+    "year": "2021",
+    "trim": "EcoBoost",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 51,
+    "make": "Ford",
+    "model": "Explorer",
+    "year": "2015",
+    "trim": "Base",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 52,
+    "make": "Ford",
+    "model": "Explorer",
+    "year": "2018",
+    "trim": "XLT",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 53,
+    "make": "Ford",
+    "model": "Edge",
+    "year": "2016",
+    "trim": "SE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 54,
+    "make": "Ford",
+    "model": "Focus",
+    "year": "2015",
+    "trim": "SE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 55,
+    "make": "Chevrolet",
+    "model": "Silverado 1500",
+    "year": "2015",
+    "trim": "Regular Cab",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 56,
+    "make": "Chevrolet",
+    "model": "Silverado 1500",
+    "year": "2018",
+    "trim": "Crew Cab",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 57,
+    "make": "Chevrolet",
+    "model": "Silverado 1500",
+    "year": "2021",
+    "trim": "LT",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 58,
+    "make": "Chevrolet",
+    "model": "Corvette",
+    "year": "2014",
+    "trim": "Base",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 59,
+    "make": "Chevrolet",
+    "model": "Corvette",
+    "year": "2020",
+    "trim": "Stingray",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 60,
+    "make": "Chevrolet",
+    "model": "Equinox",
+    "year": "2016",
+    "trim": "LT",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 61,
+    "make": "Chevrolet",
+    "model": "Equinox",
+    "year": "2019",
+    "trim": "LT",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 62,
+    "make": "Chevrolet",
+    "model": "Malibu",
+    "year": "2015",
+    "trim": "LS",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 63,
+    "make": "Chevrolet",
+    "model": "Traverse",
+    "year": "2015",
+    "trim": "LS",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 64,
+    "make": "Tesla",
+    "model": "Model 3",
+    "year": "2018",
+    "trim": "Standard Range",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 65,
+    "make": "Tesla",
+    "model": "Model 3",
+    "year": "2020",
+    "trim": "Standard Range Plus",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 66,
+    "make": "Tesla",
+    "model": "Model S",
+    "year": "2015",
+    "trim": "P90D",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 67,
+    "make": "Tesla",
+    "model": "Model S",
+    "year": "2018",
+    "trim": "Long Range",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 68,
+    "make": "Tesla",
+    "model": "Model X",
+    "year": "2016",
+    "trim": "P100D",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 69,
+    "make": "Tesla",
+    "model": "Model X",
+    "year": "2019",
+    "trim": "Long Range",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 70,
+    "make": "Tesla",
+    "model": "Model Y",
+    "year": "2020",
+    "trim": "Long Range",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 71,
+    "make": "Volkswagen",
+    "model": "Jetta",
+    "year": "2015",
+    "trim": "SE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 72,
+    "make": "Volkswagen",
+    "model": "Jetta",
+    "year": "2018",
+    "trim": "S",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 73,
+    "make": "Volkswagen",
+    "model": "Passat",
+    "year": "2015",
+    "trim": "SE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 74,
+    "make": "Volkswagen",
+    "model": "Passat",
+    "year": "2018",
+    "trim": "S",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 75,
+    "make": "Volkswagen",
+    "model": "Golf",
+    "year": "2015",
+    "trim": "S",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 76,
+    "make": "Volkswagen",
+    "model": "Golf",
+    "year": "2018",
+    "trim": "SE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 77,
+    "make": "Volkswagen",
+    "model": "Tiguan",
+    "year": "2016",
+    "trim": "S",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 78,
+    "make": "Hyundai",
+    "model": "Elantra",
+    "year": "2015",
+    "trim": "SE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 79,
+    "make": "Hyundai",
+    "model": "Elantra",
+    "year": "2018",
+    "trim": "SE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 80,
+    "make": "Hyundai",
+    "model": "Sonata",
+    "year": "2015",
+    "trim": "SE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 81,
+    "make": "Hyundai",
+    "model": "Sonata",
+    "year": "2018",
+    "trim": "SE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 82,
+    "make": "Hyundai",
+    "model": "Santa Fe",
+    "year": "2015",
+    "trim": "SE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 83,
+    "make": "Hyundai",
+    "model": "Santa Fe",
+    "year": "2018",
+    "trim": "SE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 84,
+    "make": "Kia",
+    "model": "Forte",
+    "year": "2015",
+    "trim": "EX",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 85,
+    "make": "Kia",
+    "model": "Forte",
+    "year": "2018",
+    "trim": "S",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 86,
+    "make": "Kia",
+    "model": "Optima",
+    "year": "2015",
+    "trim": "LX",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 87,
+    "make": "Kia",
+    "model": "Optima",
+    "year": "2018",
+    "trim": "S",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 88,
+    "make": "Kia",
+    "model": "Sportage",
+    "year": "2016",
+    "trim": "LX",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 89,
+    "make": "Kia",
+    "model": "Sportage",
+    "year": "2019",
+    "trim": "LX",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 90,
+    "make": "Kia",
+    "model": "Sorento",
+    "year": "2015",
+    "trim": "LX",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 91,
+    "make": "Mazda",
+    "model": "Mazda3",
+    "year": "2015",
+    "trim": "i Sport",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 92,
+    "make": "Mazda",
+    "model": "Mazda3",
+    "year": "2018",
+    "trim": "i Sport",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 93,
+    "make": "Mazda",
+    "model": "Mazda6",
+    "year": "2015",
+    "trim": "i Sport",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 94,
+    "make": "Mazda",
+    "model": "Mazda6",
+    "year": "2018",
+    "trim": "i Touring",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 95,
+    "make": "Mazda",
+    "model": "CX-5",
+    "year": "2015",
+    "trim": "Sport",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 96,
+    "make": "Mazda",
+    "model": "CX-5",
+    "year": "2018",
+    "trim": "Touring",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 97,
+    "make": "Nissan",
+    "model": "Altima",
+    "year": "2015",
+    "trim": "2.5S",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 98,
+    "make": "Nissan",
+    "model": "Altima",
+    "year": "2018",
+    "trim": "S",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 99,
+    "make": "Nissan",
+    "model": "Sentra",
+    "year": "2015",
+    "trim": "S",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 100,
+    "make": "Nissan",
+    "model": "Sentra",
+    "year": "2018",
+    "trim": "S",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 101,
+    "make": "Nissan",
+    "model": "Rogue",
+    "year": "2015",
+    "trim": "S",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 102,
+    "make": "Nissan",
+    "model": "Rogue",
+    "year": "2018",
+    "trim": "S",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 103,
+    "make": "Nissan",
+    "model": "Pathfinder",
+    "year": "2014",
+    "trim": "S",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 104,
+    "make": "Audi",
+    "model": "A4",
+    "year": "2015",
+    "trim": "Ultra",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 105,
+    "make": "Audi",
+    "model": "A4",
+    "year": "2018",
+    "trim": "Premium",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 106,
+    "make": "Audi",
+    "model": "A6",
+    "year": "2015",
+    "trim": "Premium",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 107,
+    "make": "Audi",
+    "model": "Q3",
+    "year": "2015",
+    "trim": "Premium",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 108,
+    "make": "Audi",
+    "model": "Q5",
+    "year": "2015",
+    "trim": "Premium",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 109,
+    "make": "Audi",
+    "model": "Q5",
+    "year": "2018",
+    "trim": "Premium",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 110,
+    "make": "Lexus",
+    "model": "ES 350",
+    "year": "2015",
+    "trim": "Base",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 111,
+    "make": "Lexus",
+    "model": "RX 350",
+    "year": "2015",
+    "trim": "Base",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 112,
+    "make": "Lexus",
+    "model": "RX 350",
+    "year": "2018",
+    "trim": "F Sport",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 113,
+    "make": "Lexus",
+    "model": "GX 460",
+    "year": "2015",
+    "trim": "Base",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 114,
+    "make": "Jeep",
+    "model": "Wrangler",
+    "year": "2015",
+    "trim": "Sport",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 115,
+    "make": "Jeep",
+    "model": "Wrangler",
+    "year": "2018",
+    "trim": "Sport",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 116,
+    "make": "Jeep",
+    "model": "Cherokee",
+    "year": "2015",
+    "trim": "Sport",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 117,
+    "make": "Jeep",
+    "model": "Cherokee",
+    "year": "2018",
+    "trim": "Latitude",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 118,
+    "make": "Jeep",
+    "model": "Grand Cherokee",
+    "year": "2015",
+    "trim": "Laredo",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 119,
+    "make": "Jeep",
+    "model": "Renegade",
+    "year": "2015",
+    "trim": "Sport",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 120,
+    "make": "Ram",
+    "model": "1500",
+    "year": "2015",
+    "trim": "Regular Cab",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 121,
+    "make": "Ram",
+    "model": "1500",
+    "year": "2018",
+    "trim": "Crew Cab",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 122,
+    "make": "Ram",
+    "model": "2500",
+    "year": "2015",
+    "trim": "Regular Cab",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 123,
+    "make": "GMC",
+    "model": "Sierra 1500",
+    "year": "2015",
+    "trim": "Regular Cab",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 124,
+    "make": "GMC",
+    "model": "Sierra 1500",
+    "year": "2018",
+    "trim": "Crew Cab",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 125,
+    "make": "GMC",
+    "model": "Terrain",
+    "year": "2015",
+    "trim": "SLE",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 126,
+    "make": "Subaru",
+    "model": "Outback",
+    "year": "2015",
+    "trim": "2.5i",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 127,
+    "make": "Subaru",
+    "model": "Outback",
+    "year": "2018",
+    "trim": "2.5i",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 128,
+    "make": "Subaru",
+    "model": "Impreza",
+    "year": "2015",
+    "trim": "2.0i",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 129,
+    "make": "Subaru",
+    "model": "Crosstrek",
+    "year": "2015",
+    "trim": "2.0i",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 130,
+    "make": "Subaru",
+    "model": "Crosstrek",
+    "year": "2018",
+    "trim": "2.0i",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 131,
+    "make": "Volvo",
+    "model": "S60",
+    "year": "2015",
+    "trim": "T5 Momentum",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 132,
+    "make": "Volvo",
+    "model": "V60",
+    "year": "2015",
+    "trim": "T5 Momentum",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  },
+  {
+    "id": 133,
+    "make": "Volvo",
+    "model": "XC90",
+    "year": "2015",
+    "trim": "T5 Momentum",
+    "created_at": "31/3/2026 10:53:18",
+    "updated_at": "31/3/2026 10:53:18"
+  }
+]

@@ -12,7 +12,7 @@ class CarSeeder1 extends Seeder
     public function run(): void
     {
         // 1. Отримуємо дані з файлу
-        $path = database_path('data/cars.json');
+        $path = database_path('database/data/CARS.json');
         
         if (!File::exists($path)) {
             $this->command->error("Файл не знайдено: $path");
