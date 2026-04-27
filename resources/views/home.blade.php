@@ -3,7 +3,7 @@
 @section('content')
 <div class="hero">
     <div class="container">
-        <h1>Добро пожалувати до Моториста!</h1>
+        <h1>Ласкаво просимо до Моториста!</h1>
         <p>Найкращі послуги для вашого автомобіля</p>
         <a href="#services" class="btn btn-custom text-white">Дізнатись більше</a>
     </div>
@@ -30,7 +30,7 @@
                 </ul>
             </div>
             <div class="col-md-6">
-                <img src="https://picsum.photos/400/300?random=1" alt="Про нас" class="img-fluid rounded">
+                <img src="https://practica2026pelara.local/storage/app/public/image/mechanics.png" alt="Про нас" class="img-fluid rounded">
             </div>
         </div>
     </section>

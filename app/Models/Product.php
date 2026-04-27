@@ -17,11 +17,24 @@ class Product extends Model
         'sku',
         'category_id',
         'image_path',
+        'compatible_make',
+        'compatible_model',
+        'compatible_year',
+        'compatible_vins',
+    ];
+
+    protected $casts = [
+        'compatible_vins' => 'array',
     ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function car()
+    {
+        return $this->belongsTo(Car::class);
     }
 
     public function orders()

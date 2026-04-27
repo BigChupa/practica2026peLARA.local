@@ -13,9 +13,18 @@
 
             <h5>Доставка</h5>
             <p>
-                @if($delivery === 'nova') Нова Пошта @else Укрпошта @endif
+                <strong>Компанія:</strong> {{ $order->delivery_service === 'nova_poshta' ? 'Нова Пошта' : 'Укрпошта' }}<br>
+                <strong>Тип:</strong> 
+                @if($order->delivery_type === 'post_office')
+                    Відділення
+                @elseif($order->delivery_type === 'postomat')
+                    Поштомат
+                @else
+                    Кур'єр на адресу
+                @endif
                 <br>
-                {{ $delivery_details ?: '—' }}
+                <strong>Місто:</strong> {{ $order->delivery_city }}<br>
+                <strong>Адреса:</strong> {{ $order->delivery_address }}
             </p>
 
             <h5>Оплата — банківський переказ</h5>
@@ -53,7 +62,7 @@
     </div>
 
     <div class="mt-4">
-        <a href="{{ route('shop') }}" class="btn btn-outline-primary">Повернутись до магазину</a>
+        <a href="{{ route('shop') }}" class="btn btn-outline-primary">Повернутися до магазину</a>
     </div>
 </div>
 @endsection

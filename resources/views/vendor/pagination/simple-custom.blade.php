@@ -2,9 +2,9 @@
     <nav>
         <ul class="pagination justify-content-center">
             @if ($paginator->onFirstPage())
-                <li class="page-item disabled"><span class="page-link">&laquo; Назад</span></li>
+                <li class="page-item disabled"><span class="page-link">&laquo; Попередня</span></li>
             @else
-                <li class="page-item"><a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev">&laquo; Назад</a></li>
+                <li class="page-item"><a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev">&laquo; Попередня</a></li>
             @endif
             @foreach ($elements as $element)
                 @if (is_string($element))
@@ -21,13 +21,13 @@
                 @endif
             @endforeach
             @if ($paginator->hasMorePages())
-                <li class="page-item"><a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next">Вперед &raquo;</a></li>
+                <li class="page-item"><a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next">Наступна &raquo;</a></li>
             @else
-                <li class="page-item disabled"><span class="page-link">Вперед &raquo;</span></li>
+                <li class="page-item disabled"><span class="page-link">Наступна &raquo;</span></li>
             @endif
         </ul>
         <div class="text-center mt-2">
-            <small>Показано с {{ $paginator->firstItem() }} по {{ $paginator->lastItem() }} из {{ $paginator->total() }} товарів</small>
+            <small>Показано з {{ $paginator->firstItem() }} до {{ $paginator->lastItem() }} із {{ $paginator->total() }} товарів</small>
         </div>
     </nav>
 @endif

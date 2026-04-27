@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -19,7 +20,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.products.create', compact('categories'));
+        $cars = Car::orderBy('make')->orderBy('model')->get();
+        return view('admin.products.create', compact('categories', 'cars'));
     }
 
     public function store(Request $request)
@@ -29,12 +31,24 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'description' => 'nullable|string',
             'category_id' => 'nullable|exists:categories,id',
+            'car_id' => 'nullable|exists:cars,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'stock_quantity' => 'nullable|integer|min:0',
         ]);
 
         $data['sku'] = 'AP-' . strtoupper(Str::random(2)) . '-' . rand(10000, 99999);
         $data['stock_quantity'] = $data['stock_quantity'] ?? 0;
+
+        // Если выбран автомобиль, заполнить совместимость
+        if (!empty($data['car_id'])) {
+            $car = Car::find($data['car_id']);
+            if ($car) {
+                $data['compatible_make'] = $car->make;
+                $data['compatible_model'] = $car->model;
+                $data['compatible_year'] = $car->year;
+                $data['compatible_vins'] = [$car->vin];
+            }
+        }
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -51,7 +65,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::all();
-        return view('admin.products.edit', compact('product', 'categories'));
+        $cars = Car::orderBy('make')->orderBy('model')->get();
+        return view('admin.products.edit', compact('product', 'categories', 'cars'));
     }
 
     public function update(Request $request, Product $product)
@@ -61,6 +76,7 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'description' => 'nullable|string',
             'category_id' => 'nullable|exists:categories,id',
+            'car_id' => 'nullable|exists:cars,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'stock_quantity' => 'nullable|integer|min:0',
         ]);
@@ -73,6 +89,17 @@ class ProductController extends Controller
             $image = $request->file('image');
             $path = $image->store('products', 'public');
             $data['image_path'] = $path;
+        }
+
+        // Если выбран автомобиль, заполнить совместимость
+        if (!empty($data['car_id'])) {
+            $car = Car::find($data['car_id']);
+            if ($car) {
+                $data['compatible_make'] = $car->make;
+                $data['compatible_model'] = $car->model;
+                $data['compatible_year'] = $car->year;
+                $data['compatible_vins'] = [$car->vin];
+            }
         }
 
         unset($data['image']);

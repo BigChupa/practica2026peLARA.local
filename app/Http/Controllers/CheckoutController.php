@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\DeliveryOffice;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
@@ -14,7 +16,7 @@ class CheckoutController extends Controller
     public function show(Request $request)
     {
         if (Auth::check()) {
-            $cart = \App\Models\Cart::firstOrCreate(['user_id' => Auth::id()]);
+            $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
             $cart->load('items.product');
             $items = $cart->items;
         } else {
@@ -39,12 +41,14 @@ class CheckoutController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:50',
-            'delivery' => 'required|in:nova,ukr',
-            'delivery_details' => 'nullable|string|max:1000',
+            'delivery_service' => 'required|in:nova_poshta,ukrposhta',
+            'delivery_type' => 'required|in:post_office,postomat,home_delivery',
+            'delivery_city' => 'required|string|max:255',
+            'delivery_address' => 'required|string',
         ]);
 
         if (Auth::check()) {
-            $cart = \App\Models\Cart::firstOrCreate(['user_id' => Auth::id()]);
+            $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
             $cart->load('items.product');
             $items = $cart->items;
         } else {
@@ -80,17 +84,26 @@ class CheckoutController extends Controller
             $total += $item->product->price * $item->quantity;
         }
 
+        // Prepare delivery information
+        $deliveryCity = $data['delivery_city'];
+        $deliveryAddress = $data['delivery_address'];
+
         $order = Order::create([
             'user_id' => $user->id,
             'total_amount' => $total,
             'status' => 'pending',
+            'delivery_service' => $data['delivery_service'],
+            'delivery_type' => $data['delivery_type'],
+            'delivery_city' => $deliveryCity,
+            'delivery_address' => $deliveryAddress,
+            'payment_method' => 'bank_transfer',
         ]);
 
         foreach ($items as $item) {
             $order->products()->attach($item->product->id, ['quantity' => $item->quantity, 'price' => $item->product->price]);
         }
 
-        session(['last_order_id' => $order->id, 'last_order_contact' => $data, 'last_order_delivery' => $data['delivery'], 'last_order_delivery_details' => $data['delivery_details']]);
+        session(['last_order_id' => $order->id, 'last_order_contact' => $data]);
 
         if (Auth::check()) {
             $cart->items()->delete();
@@ -109,8 +122,6 @@ class CheckoutController extends Controller
         }
         $order = Order::with('products')->find($orderId);
         $contact = session('last_order_contact', []);
-        $delivery = session('last_order_delivery');
-        $delivery_details = session('last_order_delivery_details');
 
         $bank = [
             'recipient' => 'ТОВ «Моторист»',
@@ -120,6 +131,6 @@ class CheckoutController extends Controller
             'note' => 'Платіж за замовлення #' . $order->id,
         ];
 
-        return view('checkout.confirmation', compact('order', 'contact', 'delivery', 'delivery_details', 'bank'));
+        return view('checkout.confirmation', compact('order', 'contact', 'bank'));
     }
 }

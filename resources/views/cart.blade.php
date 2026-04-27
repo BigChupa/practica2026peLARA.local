@@ -57,7 +57,7 @@
         </div>
 
         <div class="d-flex justify-content-end">
-            <a href="{{ route('shop') }}" class="btn btn-outline-secondary me-2">Повернутись до магазину</a>
+            <a href="{{ route('shop') }}" class="btn btn-outline-secondary me-2">Повернутися до магазину</a>
             <a id="checkout-btn" href="{{ route('checkout.show') }}" class="btn btn-success">Оформити замовлення</a>
         </div>
     @endif

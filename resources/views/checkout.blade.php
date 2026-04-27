@@ -6,7 +6,7 @@
 
     @if($items->isEmpty())
         <div class="alert alert-info">Ваш кошик порожній.</div>
-        <a href="{{ route('shop') }}" class="btn btn-primary">Повернутись до магазину</a>
+        <a href="{{ route('shop') }}" class="btn btn-primary">Повернутися до магазину</a>
     @else
         <div class="row">
             <div class="col-md-7">
@@ -26,21 +26,35 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Доставка</label>
-                        <select name="delivery" class="form-select" required>
-                            <option value="nova">Нова Пошта</option>
-                            <option value="ukr">Укрпошта</option>
+                        <label class="form-label">Компанія доставки</label>
+                        <select name="delivery_service" class="form-select" required>
+                            <option value="nova_poshta">Нова Пошта</option>
+                            <option value="ukrposhta">Укрпошта</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Деталі доставки (відділення або адреса)</label>
-                        <input type="text" name="delivery_details" class="form-control" value="{{ old('delivery_details') }}">
+                        <label class="form-label">Тип доставки</label>
+                        <select name="delivery_type" class="form-select" required>
+                            <option value="post_office">Відділення</option>
+                            <option value="postomat">Поштомат</option>
+                            <option value="home_delivery">Кур'єр на адресу</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Місто доставки</label>
+                        <input type="text" name="delivery_city" class="form-control" placeholder="Наприклад: Київ" value="{{ old('delivery_city') }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Адреса</label>
+                        <input type="text" name="delivery_address" class="form-control" placeholder="Наприклад: вул. Шевченка, 10, кв. 5 або Відділення №1" value="{{ old('delivery_address') }}" required>
                     </div>
 
                     <div class="d-grid gap-2">
                         <button class="btn btn-success">Підтвердити замовлення (оплата банківським переказом)</button>
-                        <a href="{{ route('cart.index') }}" class="btn btn-outline-secondary">Повернутись до кошика</a>
+                        <a href="{{ route('cart.index') }}" class="btn btn-outline-secondary">Повернутися до кошика</a>
                     </div>
                 </form>
             </div>
@@ -70,4 +84,6 @@
         </div>
     @endif
 </div>
+
+
 @endsection

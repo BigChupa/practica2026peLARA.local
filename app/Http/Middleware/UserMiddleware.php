@@ -10,7 +10,7 @@ class UserMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check() || !auth()->user()->isUser()) {
+        if (!auth()->check() || !(auth()->user()->isUser() || auth()->user()->isAdmin())) {
             abort(403, 'Unauthorized. User access required.');
         }
 

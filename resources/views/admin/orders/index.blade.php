@@ -39,7 +39,7 @@
                 <small class="text-muted">{{ $order->user->email ?? '' }}</small>
               </td>
               <td>
-                {{ $order->products->count() }} товар(и)
+                {{ $order->products->count() }} товарів
               </td>
               <td><strong>₴{{ number_format($order->total_amount, 2, ',', ' ') }}</strong></td>
               <td>

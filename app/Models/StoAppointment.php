@@ -12,6 +12,8 @@ class StoAppointment extends Model
     protected $table = 'sto_appointments';
 
     protected $fillable = [
+        'service_id',
+        'service_name',
         'name',
         'phone',
         'appointment_date',

@@ -44,6 +44,20 @@
   </div>
 
   <div class="mb-3">
+    <label class="form-label">Автомобіль (опціонально)</label>
+    <select name="car_id" class="form-control @error('car_id') is-invalid @enderror">
+      <option value="">-- Не привязаний до авто --</option>
+      @foreach($cars as $car)
+        <option value="{{ $car->id }}" {{ old('car_id', $product->car_id ?? '') == $car->id ? 'selected' : '' }}>
+          {{ $car->make }} {{ $car->model }} ({{ $car->year }})
+        </option>
+      @endforeach
+    </select>
+    <small class="text-muted">Вибір авто автоматично заповнить сумісність</small>
+    @error('car_id') <span class="invalid-feedback">{{ $message }}</span> @enderror
+  </div>
+
+  <div class="mb-3">
     <label class="form-label">Виробіток (шт.)</label>
     <input type="number" name="stock_quantity" class="form-control @error('stock_quantity') is-invalid @enderror" value="{{ old('stock_quantity', $product->stock_quantity ?? '0') }}" min="0">
     @error('stock_quantity') <span class="invalid-feedback">{{ $message }}</span> @enderror

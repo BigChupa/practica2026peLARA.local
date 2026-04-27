@@ -30,6 +30,30 @@
                     </div>
 
                     <div class="mb-3">
+                        <label class="form-label"><i class="fas fa-car"></i> Вибір автомобіля</label>
+                        <select name="car_make" id="car-make" class="form-select">
+                            <option value="">-- Виберіть марку --</option>
+                            @foreach($makes as $make)
+                                <option value="{{ $make }}" {{ request('car_make') == $make ? 'selected' : '' }}>{{ $make }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-3" id="model-select-wrapper" style="display: none;">
+                        <label class="form-label">Модель</label>
+                        <select name="car_model" id="car-model" class="form-select">
+                            <option value="">-- Виберіть модель --</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3" id="year-select-wrapper" style="display: none;">
+                        <label class="form-label">Рік</label>
+                        <select name="car_year" id="car-year" class="form-select">
+                            <option value="">-- Виберіть рік --</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
                         <label class="form-label">Категорія</label>
                         <select name="category_id" class="form-select">
                             <option value="">Всі категорії</option>
@@ -64,9 +88,9 @@
                         <div class="col-md-6 col-lg-4 mb-4">
                             <div class="card h-100 shadow-sm">
                                 @if($product->image_path)
-                                    <img src="/{{ 'storage/app/public/' . $product->image_path }}" class="card-img-top" alt="{{ $product->name }}">
+                                    <img src="{{ asset('storage/' . $product->image_path) }}" class="card-img-top" alt="{{ $product->name }}">
                                 @else
-                                    <img src="https://picsum.photos/300/200?random={{ $product->id }}" class="card-img-top" alt="{{ $product->name }}">
+                                    <img src="{{ asset('storage/image/121.png') }}" class="card-img-top" alt="{{ $product->name }}">
                                 @endif
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $product->name }}</h5>
@@ -277,6 +301,88 @@ document.addEventListener('DOMContentLoaded', function(){
         });
         setTimeout(function(){ window.location.href = href; }, 400);
     });
+
+    // Фільтр по марке/модели/году (Cascading selects)
+    const carMakeSelect = document.getElementById('car-make');
+    const carModelSelect = document.getElementById('car-model');
+    const carYearSelect = document.getElementById('car-year');
+    const modelSelectWrapper = document.getElementById('model-select-wrapper');
+    const yearSelectWrapper = document.getElementById('year-select-wrapper');
+
+    // Инициализация при загрузке страницы
+    if (carMakeSelect && carMakeSelect.value) {
+        loadModels(carMakeSelect.value);
+    }
+    if (carModelSelect && carModelSelect.value && carMakeSelect && carMakeSelect.value) {
+        loadYears(carMakeSelect.value, carModelSelect.value);
+    }
+
+    // Обработчик изменения марки
+    carMakeSelect?.addEventListener('change', function() {
+        if (!this.value) {
+            carModelSelect.innerHTML = '<option value="">-- Виберіть модель --</option>';
+            carYearSelect.innerHTML = '<option value="">-- Виберіть рік --</option>';
+            modelSelectWrapper.style.display = 'none';
+            yearSelectWrapper.style.display = 'none';
+            return;
+        }
+
+        loadModels(this.value);
+    });
+
+    // Обработчик изменения модели
+    carModelSelect?.addEventListener('change', function() {
+        if (!this.value || !carMakeSelect.value) {
+            carYearSelect.innerHTML = '<option value="">-- Виберіть рік --</option>';
+            yearSelectWrapper.style.display = 'none';
+            return;
+        }
+
+        loadYears(carMakeSelect.value, this.value);
+    });
+
+    function loadModels(make) {
+        fetch("{{ route('shop.models') }}?make=" + encodeURIComponent(make))
+            .then(r => r.json())
+            .then(data => {
+                carModelSelect.innerHTML = '<option value="">-- Виберіть модель --</option>';
+                data.models.forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model;
+                    option.textContent = model;
+                    if (model === "{{ request('car_model') }}") {
+                        option.selected = true;
+                    }
+                    carModelSelect.appendChild(option);
+                });
+                modelSelectWrapper.style.display = 'block';
+                
+                // Якщо була вибрана модель, завантажити роки
+                if (carModelSelect.value) {
+                    loadYears(make, carModelSelect.value);
+                }
+            })
+            .catch(e => console.error('Помилка завантаження моделей:', e));
+    }
+
+    function loadYears(make, model) {
+        fetch("{{ route('shop.years') }}?make=" + encodeURIComponent(make) + "&model=" + encodeURIComponent(model))
+            .then(r => r.json())
+            .then(data => {
+                carYearSelect.innerHTML = '<option value="">-- Виберіть рік --</option>';
+                data.years.forEach(year => {
+                    const option = document.createElement('option');
+                    option.value = year;
+                    option.textContent = year;
+                    if (year === "{{ request('car_year') }}") {
+                        option.selected = true;
+                    }
+                    carYearSelect.appendChild(option);
+                });
+                yearSelectWrapper.style.display = 'block';
+            })
+            .catch(e => console.error('Помилка завантаження років:', e));
+    }
 });
 </script>
 @endpush

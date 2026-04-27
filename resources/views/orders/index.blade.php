@@ -7,7 +7,7 @@
       <h2>Мої замовлення</h2>
     </div>
     <div class="col-md-4 text-end">
-      <a href="{{ route('shop ') }}" class="btn btn-secondary">
+      <a href="{{ route('shop') }}" class="btn btn-secondary">
         <i class="fas fa-arrow-left"></i> На головну
       </a>
     </div>
@@ -40,7 +40,7 @@
             <tr>
               <td><strong>#{{ $order->id }}</strong></td>
               <td>{{ $order->order_date->format('d.m.Y H:i') }}</td>
-              <td>{{ $order->products->count() }} товар(и)</td>
+              <td>{{ $order->products->count() }} товарів</td>
               <td><strong>₴{{ number_format($order->total_amount, 2, ',', ' ') }}</strong></td>
               <td>
                 @if($order->status === 'pending')

@@ -20,7 +20,8 @@
               @foreach($toCall as $appointment)
                 <li class="list-group-item">
                   <strong>{{ $appointment->name }}</strong> — {{ $appointment->phone }}<br>
-                  <span class="text-muted">{{ $appointment->appointment_date ?? 'Дата не вказана' }}</span>
+                  <span class="text-muted">{{ $appointment->appointment_date ?? 'Дата не вказана' }}</span><br>
+                  <span class="text-secondary">Послуга: {{ $appointment->service_name ?? '-' }}</span>
                   @if($appointment->notes)
                     <div><small>Примітки: {{ $appointment->notes }}</small></div>
                   @endif
@@ -46,7 +47,8 @@
               @foreach($called as $appointment)
                 <li class="list-group-item">
                   <strong>{{ $appointment->name }}</strong> — {{ $appointment->phone }}<br>
-                  <span class="text-muted">{{ $appointment->appointment_date ?? 'Дата не вказана' }}</span>
+                  <span class="text-muted">{{ $appointment->appointment_date ?? 'Дата не вказана' }}</span><br>
+                  <span class="text-secondary">Послуга: {{ $appointment->service_name ?? '-' }}</span>
                   @if($appointment->notes)
                     <div><small>Примітки: {{ $appointment->notes }}</small></div>
                   @endif

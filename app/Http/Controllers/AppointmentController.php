@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\StoAppointment;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 class AppointmentController extends Controller
 {
@@ -16,13 +17,18 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'service_id' => 'required|exists:services,id',
+            'service_id' => 'nullable|exists:services,id',
+            'service_name' => 'required_without:service_id|string|max:255',
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'notes' => 'nullable|string',
         ]);
 
         $validated['status'] = 'pending';
+
+        if (!Schema::hasColumn('sto_appointments', 'service_id')) {
+            unset($validated['service_id']);
+        }
 
         StoAppointment::create($validated);
 

@@ -66,18 +66,22 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="phone" class="form-label fw-bold">
+                                <label for="phoneVisible" class="form-label fw-bold">
                                     Номер телефону <span class="text-danger">*</span>
                                 </label>
-                                <input 
-                                    type="tel" 
-                                    class="form-control @error('phone') is-invalid @enderror"
-                                    id="phone"
-                                    name="phone"
-                                    placeholder="+380 (XX) XXX-XX-XX"
-                                    value="{{ old('phone') }}"
-                                    required
-                                >
+                                <div class="input-group">
+                                    <span class="input-group-text">+380</span>
+                                    <input 
+                                        type="text" 
+                                        class="form-control @error('phone') is-invalid @enderror"
+                                        id="phoneVisible"
+                                        value="{{ old('phone') ? preg_replace('/^\+380\s*/', '', old('phone')) : '' }}"
+                                        placeholder="(66) 111-11-11"
+                                        inputmode="tel"
+                                        required
+                                    >
+                                </div>
+                                <input type="hidden" name="phone" id="phone" value="{{ old('phone') }}">
                                 @error('phone')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
@@ -116,4 +120,56 @@
             </div>
         </div>
     </div>
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var phoneVisible = document.getElementById('phoneVisible');
+            var phoneHidden = document.getElementById('phone');
+
+            if (!phoneVisible || !phoneHidden) {
+                return;
+            }
+
+            function formatPhoneValue(value) {
+                var digits = value.replace(/\D/g, '').slice(0, 9);
+                var formatted = '';
+
+                if (digits.length > 0) {
+                    formatted += '(' + digits.slice(0, 2);
+                }
+                if (digits.length >= 3) {
+                    formatted += ') ' + digits.slice(2, 5);
+                }
+                if (digits.length >= 6) {
+                    formatted += '-' + digits.slice(5, 7);
+                }
+                if (digits.length >= 8) {
+                    formatted += '-' + digits.slice(7, 9);
+                }
+
+                return formatted;
+            }
+
+            function syncPhone() {
+                var formatted = formatPhoneValue(phoneVisible.value);
+                phoneVisible.value = formatted;
+                phoneHidden.value = formatted ? '+380 ' + formatted : '';
+            }
+
+            phoneVisible.addEventListener('input', function () {
+                var cursor = phoneVisible.selectionStart;
+                var before = phoneVisible.value;
+                syncPhone();
+                var after = phoneVisible.value;
+                if (after.length > before.length) {
+                    phoneVisible.setSelectionRange(cursor, cursor);
+                }
+            });
+
+            phoneVisible.addEventListener('blur', syncPhone);
+            syncPhone();
+        });
+    </script>
+@endpush
 @endsection

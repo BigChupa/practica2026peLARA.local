@@ -113,6 +113,9 @@
                         @if($product->image_path)
                           <br>
                           <img src="/{{ 'storage/app/public/' . $product->image_path }}" alt="{{ $product->name }}" style="max-width: 50px; height: auto;">
+                        @else
+                          <br>
+                          <img src="{{ asset('storage/image/121.png') }}" alt="{{ $product->name }}" style="max-width: 50px; height: auto;">
                         @endif
                       </td>
                       <td>
