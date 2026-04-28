@@ -111,15 +111,12 @@ class ShopController extends Controller
         $categories = Category::orderBy('name')->get();
         $cars = Car::orderBy('make')->orderBy('model')->orderBy('year')->get();
 
-        // Получить доступные марки для фильтра
         $makes = Car::select('make')->distinct()->orderBy('make')->pluck('make')->toArray();
         
         return view('shop', compact('products', 'categories', 'cars', 'makes'));
     }
 
-    /**
-     * API: Получить модели по марке
-     */
+   
     public function getModels(Request $request)
     {
         $request->validate(['make' => 'required|string']);
@@ -134,9 +131,7 @@ class ShopController extends Controller
         return response()->json(['models' => $models]);
     }
 
-    /**
-     * API: Получить годы по марке и модели
-     */
+    
     public function getYears(Request $request)
     {
         $request->validate([

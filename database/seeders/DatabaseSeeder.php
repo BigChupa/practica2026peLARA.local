@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
-        // Запустити окремі seeder-и
         $this->call([
             UserSeeder::class,
             CategorySeeder::class,
@@ -24,7 +23,6 @@ class DatabaseSeeder extends Seeder
             OrderSeeder::class,
         ]);
 
-        // Додатково: Create services (STO services)
         $services = [
             [
                 'name' => 'Діагностика двигуна',
@@ -62,7 +60,6 @@ class DatabaseSeeder extends Seeder
             Service::create($service);
         }
 
-        // Create appointments for users
         $users = User::where('role', 'user')->get();
         $services = Service::all();
         foreach ($users as $user) {
@@ -72,7 +69,6 @@ class DatabaseSeeder extends Seeder
                 ->create();
         }
 
-        // Create articles
         $admin = User::where('role', 'admin')->first();
         if ($admin) {
             Article::factory(8)

@@ -15,7 +15,6 @@ public function run(): void
     $products = json_decode($json, true);
 
     foreach ($products as $item) {
-        // Используем updateOrCreate, чтобы не было дублей при повторном запуске
         \App\Models\Product::updateOrCreate(
             ['id' => $item['id']], // По какому полю искать
             [

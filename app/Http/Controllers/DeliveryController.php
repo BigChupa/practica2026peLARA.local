@@ -14,9 +14,7 @@ class DeliveryController extends Controller
         $this->novaPoshtaService = $novaPoshtaService;
     }
 
-    /**
-     * Get cities for delivery service
-     */
+  
     public function getCities(Request $request)
     {
         $service = $request->get('service', 'nova_poshta');
@@ -43,9 +41,7 @@ class DeliveryController extends Controller
         }
     }
 
-    /**
-     * Get warehouses/offices for specific city
-     */
+   
     public function getWarehouses(Request $request)
     {
         $request->validate([
@@ -72,7 +68,7 @@ class DeliveryController extends Controller
                 })->values();
             }
         } else {
-            // For ukrposhta - implement later
+           
             $warehouses = collect();
         }
 
@@ -89,9 +85,7 @@ class DeliveryController extends Controller
         ]);
     }
 
-    /**
-     * Sync warehouses from API to database
-     */
+   
     public function syncWarehouses(Request $request)
     {
         try {

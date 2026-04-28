@@ -17,7 +17,6 @@ class UserSeeder extends Seeder
             'role' => 'admin',
         ]);
 
-        // Звичайні користувачі
         User::factory(10)->create(['role' => 'user']);
     }
 }

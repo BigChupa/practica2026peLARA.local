@@ -11,7 +11,6 @@ class ProductSeeder extends Seeder
     {
         $cars = \App\Models\Car::all();
 
-        // Создаем 50 товаров, связанных с случайными автомобилями
         Product::factory(50)->make()->each(function ($product) use ($cars) {
             $car = $cars->random();
             $product->car_id = $car->id;
