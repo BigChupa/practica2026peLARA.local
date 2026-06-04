@@ -12,6 +12,7 @@ use App\Http\Controllers\CartController;
 use App\Models\Service;
 
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+Route::get('/shop/product/{product}', [ShopController::class, 'show'])->name('shop.product.show');
 Route::get('/api/shop/models', [ShopController::class, 'getModels'])->name('shop.models');
 Route::get('/api/shop/years', [ShopController::class, 'getYears'])->name('shop.years');
 Route::post('/api/vin/decode', [App\Http\Controllers\VinDecoderController::class, 'decode'])->name('vin.decode');
@@ -271,6 +272,8 @@ Route::get('/appointments/{appointment}', [App\Http\Controllers\AppointmentContr
 Route::post('/appointments/{appointment}/cancel', [App\Http\Controllers\AppointmentController::class, 'cancel'])->name('appointments.cancel');
 
 Auth::routes();
+Route::get('password/reset', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('password/email', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

@@ -21,7 +21,6 @@
   @endif
 
   <div class="row">
-    <!-- Order Information -->
     <div class="col-md-6">
       <div class="card mb-4">
         <div class="card-header bg-primary text-white">
@@ -43,7 +42,6 @@
       </div>
     </div>
 
-    <!-- Status Update -->
     <div class="col-md-6">
       <div class="card mb-4">
         <div class="card-header bg-info text-white">
@@ -83,7 +81,6 @@
     </div>
   </div>
 
-  <!-- Order Items -->
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -95,8 +92,8 @@
             <p class="text-muted">Немає товарів у цьому замовленні.</p>
           @else
             <div class="table-responsive">
-              <table class="table">
-                <thead class="table-light">
+              <table class="table table-sm table-striped table-hover">
+                <thead class="table-dark">
                   <tr>
                     <th>Назва товару</th>
                     <th>Категорія</th>
@@ -111,12 +108,10 @@
                       <td>
                         <strong>{{ $product->name }}</strong>
                         @if($product->image_path)
-                          <br>
-                          <img src="/{{ 'storage/app/public/' . $product->image_path }}" alt="{{ $product->name }}" style="max-width: 50px; height: auto;">
-                        @else
-                          <br>
-                          <img src="{{ asset('storage/image/121.png') }}" alt="{{ $product->name }}" style="max-width: 50px; height: auto;">
-                        @endif
+                                    <img src="{{ asset('storage/' . $product->image_path) }}" class="img-thumbnail mt-2" alt="{{ $product->name }}" style="max-width: 80px; height: auto;">
+                                @else
+                                    <img src="{{ asset('storage/image/121.png') }}" class="img-thumbnail mt-2" alt="{{ $product->name }}" style="max-width: 80px; height: auto;">
+                          @endif
                       </td>
                       <td>
                         <span class="badge bg-info">{{ $product->category->name ?? 'Без категорії' }}</span>

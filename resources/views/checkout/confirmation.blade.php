@@ -28,7 +28,7 @@
             </p>
 
             <h5>Оплата — банківський переказ</h5>
-            <p>Будь ласка, перекажіть суму замовлення на наступні реквізити:</p>
+            <p>Ваші товари зарезервовані на складі. Будь ласка, перекажіть суму замовлення на наступні реквізити протягом 30 хвилин:</p>
             <ul>
                 <li><strong>Отримувач:</strong> {{ $bank['recipient'] }}</li>
                 <li><strong>Банк:</strong> {{ $bank['bank'] }}</li>
@@ -36,8 +36,8 @@
                 <li><strong>MFO:</strong> {{ $bank['mfo'] }}</li>
                 <li><strong>Призначення платежу:</strong> {{ $bank['note'] }}</li>
             </ul>
-
-            <p class="text-muted">Після надходження коштів ми підтвердимо замовлення та надішлемо трек-номер.</p>
+            <p><strong>Термін оплати:</strong> до {{ $order->payment_expires_at->timezone(config('app.timezone'))->format('d.m.Y H:i') }}</p>
+            <p class="text-muted">Після оплати товар буде підготовлено до відправки.</p>
         </div>
         <div class="col-md-4">
             <h5>Замовлення</h5>
@@ -46,9 +46,16 @@
                 @foreach($order->products as $p)
                     @php $line = $p->pivot->price * $p->pivot->quantity; $sum += $line; @endphp
                     <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div>
-                            <div class="fw-bold">{{ $p->name }}</div>
-                            <div class="text-muted small">x{{ $p->pivot->quantity }}</div>
+                        <div class="d-flex align-items-center gap-2">
+                            @if($p->image_path)
+                                <img src="{{ asset('storage/' . $p->image_path) }}" alt="{{ $p->name }}" class="img-thumbnail" style="max-width: 50px; height: auto;">
+                            @else
+                                <img src="{{ asset('storage/image/121.png') }}" alt="{{ $p->name }}" class="img-thumbnail" style="max-width: 50px; height: auto;">
+                            @endif
+                            <div>
+                                <div class="fw-bold">{{ $p->name }}</div>
+                                <div class="text-muted small">x{{ $p->pivot->quantity }}</div>
+                            </div>
                         </div>
                         <div>₴ {{ number_format($line, 2, ',', ' ') }}</div>
                     </li>

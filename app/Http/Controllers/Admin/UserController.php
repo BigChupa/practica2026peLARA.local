@@ -13,10 +13,24 @@ class UserController extends Controller
         $this->middleware('admin');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::withCount('posts')->paginate(15);
-        return view('admin.users.index', compact('users'));
+        $query = User::withCount('posts');
+        $searchType = $request->query('search_type', 'name');
+
+        if ($request->filled('search')) {
+            $searchTerm = $request->search;
+
+            if ($searchType === 'email') {
+                $query->where('email', 'like', '%' . $searchTerm . '%');
+            } else {
+                $query->where('name', 'like', '%' . $searchTerm . '%');
+            }
+        }
+
+        $users = $query->paginate(15);
+
+        return view('admin.users.index', compact('users', 'searchType'));
     }
 
     public function show(User $user)

@@ -87,13 +87,15 @@
                       @foreach($order->products as $product)
                         <tr>
                           <td>
-                            <strong>{{ $product->name }}</strong>
+                            <a href="{{ route('shop.product.show', $product) }}" class="text-decoration-none text-dark">
+                              <strong>{{ $product->name }}</strong>
+                            </a>
                             @if($product->image_path)
                               <br>
-                              <img src="/{{ 'storage/' . $product->image_path }}" alt="{{ $product->name }}" style="max-width: 50px; height: auto;">
+                              <img src="/storage/{{ str_replace('app/public/', '', $product->image_path) }}" alt="{{ $product->name }}" style="max-width: 50px; height: auto;">
                             @else
                               <br>
-                              <img src="{{ asset('storage/image/121.png') }}" alt="{{ $product->name }}" style="max-width: 50px; height: auto;">
+                              <img src="/storage/image/121.png" alt="{{ $product->name }}" style="max-width: 50px; height: auto;">
                             @endif
                           </td>
                           <td>

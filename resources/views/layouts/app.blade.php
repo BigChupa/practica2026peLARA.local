@@ -12,7 +12,7 @@
     
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
+    <link rel="icon" type="image/x-icon" href="{{ asset('storage/image/diplomIco.ico') }}">
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     
     <style>
@@ -205,7 +205,7 @@
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="{{ route('services') }}" id="servicesDropdown" role="button" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" id="servicesDropdown" role="button" aria-expanded="false">
                                 Послуги
                             </a>
                             <ul class="dropdown-menu services-menu" aria-labelledby="servicesDropdown">
@@ -364,7 +364,7 @@
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     @php $avatar = Auth::user()->avatar ?? null; @endphp
-                                    <img src="{{ $avatar ? '/' . 'storage/app/public/' . $avatar : 'https://www.gravatar.com/avatar/'.md5(strtolower(trim(Auth::user()->email))).'?s=40&d=mp' }}" alt="avatar" class="rounded-circle me-2" style="width:34px;height:34px;object-fit:cover">
+                                    <img src="{{ $avatar ? asset('storage/' . $avatar) : 'https://www.gravatar.com/avatar/'.md5(strtolower(trim(Auth::user()->email))).'?s=40&d=mp' }}" alt="avatar" class="rounded-circle me-2" style="width:34px;height:34px;object-fit:cover">
                                     {{ Auth::user()->name }}
                                 </a>
 

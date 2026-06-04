@@ -13,10 +13,39 @@ class CarController extends Controller
         $this->middleware('admin');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $cars = Car::orderBy('make')->orderBy('model')->orderBy('year')->paginate(15);
-        return view('admin.cars.index', compact('cars'));
+        $sort = $request->query('sort');
+
+        $makes = Car::select('make')->distinct()->orderBy('make')->pluck('make');
+        $models = Car::select('make', 'model')->distinct()->orderBy('model')->get();
+        $years = Car::select('year')->distinct()->orderBy('year', 'desc')->pluck('year');
+
+        $query = Car::withCount('products');
+
+        if ($sort === 'products_desc') {
+            $query->orderBy('products_count', 'desc');
+        } elseif ($sort === 'products_asc') {
+            $query->orderBy('products_count', 'asc');
+        } else {
+            $query->orderBy('make')->orderBy('model')->orderBy('year');
+        }
+
+        if ($request->filled('make')) {
+            $query->where('make', $request->make);
+        }
+
+        if ($request->filled('model')) {
+            $query->where('model', $request->model);
+        }
+
+        if ($request->filled('year')) {
+            $query->where('year', $request->year);
+        }
+
+        $cars = $query->paginate(15)->appends($request->query());
+
+        return view('admin.cars.index', compact('cars', 'makes', 'models', 'years', 'sort'));
     }
 
     public function create()

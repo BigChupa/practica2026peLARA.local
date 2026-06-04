@@ -150,7 +150,7 @@
                                     <label for="phoneVisible" class="form-label fw-bold">Телефон</label>
                                     <div class="input-group">
                                         <span class="input-group-text">+380</span>
-                                        <input type="text" id="phoneVisible" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') ? preg_replace('/^\+380\s*/', '', old('phone')) : '' }}" placeholder="(66) 111-11-11" inputmode="tel" required>
+                                        <input type="text" id="phoneVisible" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') ? preg_replace('/^\+380\s*/', '', old('phone')) : '' }}" placeholder="(50) 123-45-67" inputmode="tel" required>
                                     </div>
                                     <input type="hidden" name="phone" id="phone" value="{{ old('phone') }}">
                                     @error('phone')
@@ -180,10 +180,10 @@
                         <p class="mb-3"><strong>Нд:</strong> вихідний</p>
 
                         <h5 class="card-title mt-4">Контактний телефон</h5>
-                        <p class="mb-3"><a href="tel:+380123456789" class="link-dark">+380 12 345 67 89</a></p>
+                        <p class="mb-3"><a href="tel:+380503456789" class="link-dark">+380 50 345 67 89</a></p>
 
                         <h5 class="card-title mt-4">Адреса</h5>
-                        <p class="mb-0">вул. Центральна, 25, Київ</p>
+                        <p class="mb-0">вул.Артилерійська, 4, Одеса</p>
                     </div>
                 </div>
             </div>

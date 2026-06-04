@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-5">
     <div class="row mb-4">
         <div class="col-md-8">
             <h2><i class="fas fa-edit"></i> Редагування: {{ $car->make }} {{ $car->model }}</h2>

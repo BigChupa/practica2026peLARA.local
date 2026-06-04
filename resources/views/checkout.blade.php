@@ -4,6 +4,16 @@
 <div class="container py-5">
     <h1 class="mb-4">Оформлення замовлення</h1>
 
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     @if($items->isEmpty())
         <div class="alert alert-info">Ваш кошик порожній.</div>
         <a href="{{ route('shop') }}" class="btn btn-primary">Повернутися до магазину</a>
@@ -65,9 +75,16 @@
                     @foreach($items as $item)
                         @php $line = $item->product->price * $item->quantity; $subtotal += $line; @endphp
                         <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div>
-                                <div class="fw-bold">{{ $item->product->name }}</div>
-                                <div class="text-muted small">x{{ $item->quantity }}</div>
+                            <div class="d-flex align-items-center gap-2">
+                                @if($item->product->image_path)
+                                    <img src="{{ asset('storage/' . $item->product->image_path) }}" alt="{{ $item->product->name }}" class="img-thumbnail" style="max-width: 50px; height: auto;">
+                                @else
+                                    <img src="{{ asset('storage/image/121.png') }}" alt="{{ $item->product->name }}" class="img-thumbnail" style="max-width: 50px; height: auto;">
+                                @endif
+                                <div>
+                                    <div class="fw-bold">{{ $item->product->name }}</div>
+                                    <div class="text-muted small">x{{ $item->quantity }}</div>
+                                </div>
                             </div>
                             <div>₴ {{ number_format($line, 2, ',', ' ') }}</div>
                         </li>

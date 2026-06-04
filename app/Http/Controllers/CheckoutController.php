@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\DeliveryOffice;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,8 @@ class CheckoutController extends Controller
 {
     public function show(Request $request)
     {
+        Reservation::expireOldReservations();
+
         if (Auth::check()) {
             $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
             $cart->load('items.product');
@@ -37,6 +40,8 @@ class CheckoutController extends Controller
 
     public function store(Request $request)
     {
+        Reservation::expireOldReservations();
+
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
@@ -65,6 +70,14 @@ class CheckoutController extends Controller
             return back()->withErrors(['cart' => 'Кошик порожній']);
         }
 
+        foreach ($items as $item) {
+            if ($item->quantity > $item->product->stock_quantity) {
+                return back()->withErrors([
+                    'cart' => "Товар \"{$item->product->name}\" має лише {$item->product->stock_quantity} одиниць на складі. Поменше кількість або видаліть товар з кошика.",
+                ])->withInput();
+            }
+        }
+
         if (Auth::check()) {
             $user = Auth::user();
         } else {
@@ -84,23 +97,32 @@ class CheckoutController extends Controller
             $total += $item->product->price * $item->quantity;
         }
 
-        // Prepare delivery information
-        $deliveryCity = $data['delivery_city'];
-        $deliveryAddress = $data['delivery_address'];
+        $expiresAt = now()->addMinutes(30);
 
         $order = Order::create([
             'user_id' => $user->id,
             'total_amount' => $total,
             'status' => 'pending',
+            'order_date' => now(),
+            'payment_method' => 'bank_transfer',
             'delivery_service' => $data['delivery_service'],
             'delivery_type' => $data['delivery_type'],
-            'delivery_city' => $deliveryCity,
-            'delivery_address' => $deliveryAddress,
-            'payment_method' => 'bank_transfer',
+            'delivery_city' => $data['delivery_city'],
+            'delivery_address' => $data['delivery_address'],
+            'payment_expires_at' => $expiresAt,
         ]);
 
         foreach ($items as $item) {
             $order->products()->attach($item->product->id, ['quantity' => $item->quantity, 'price' => $item->product->price]);
+            Reservation::create([
+                'order_id' => $order->id,
+                'product_id' => $item->product->id,
+                'quantity' => $item->quantity,
+                'expires_at' => $expiresAt,
+            ]);
+
+            $item->product->stock_quantity -= $item->quantity;
+            $item->product->save();
         }
 
         session(['last_order_id' => $order->id, 'last_order_contact' => $data]);
@@ -116,12 +138,19 @@ class CheckoutController extends Controller
 
     public function confirmation(Request $request)
     {
+        Reservation::expireOldReservations();
+
         $orderId = session('last_order_id');
         if (!$orderId) {
             return redirect()->route('shop');
         }
+
         $order = Order::with('products')->find($orderId);
         $contact = session('last_order_contact', []);
+
+        if (!$order || $order->status === 'cancelled') {
+            return redirect()->route('shop')->withErrors(['order' => 'Термін бронювання минув або замовлення недоступне. Будь ласка, спробуйте оформити замовлення ще раз.']);
+        }
 
         $bank = [
             'recipient' => 'ТОВ «Моторист»',

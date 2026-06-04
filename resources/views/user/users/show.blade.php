@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-4">
     <div class="row mb-4">
         <div class="col-md-3 text-center">
-            @if($user->avatar)
-                <img src="/{{ 'storage/app/public/' . $user->avatar }}" class="rounded-circle mb-2" style="width:120px;height:120px;object-fit:cover">
-            @else
-                <img src="https://www.gravatar.com/avatar/{{ md5(strtolower(trim($user->email))) }}?s=120&d=mp" class="rounded-circle mb-2" style="width:120px;height:120px;object-fit:cover">
+                        @if($user->avatar)
+                            <img src="{{ asset('storage/' . $user->avatar) }}" class="rounded-circle mb-2" style="width:120px;height:120px;object-fit:cover">
+                        @else
+                            <img src="https://www.gravatar.com/avatar/{{ md5(strtolower(trim($user->email))) }}?s=120&d=mp" class="rounded-circle mb-2" style="width:120px;height:120px;object-fit:cover">
             @endif
             @if(auth()->id() === $user->id)
                 <div class="mt-2">

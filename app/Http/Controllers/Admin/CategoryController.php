@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Controllers\Controller;
@@ -14,10 +15,23 @@ class CategoryController extends Controller
         $this->middleware('admin');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::withCount('posts')->paginate(15);
-        return view('admin.categories.index', compact('categories'));
+        $sort = $request->query('sort');
+
+        $query = Category::withCount('products');
+
+        if ($sort === 'products_desc') {
+            $query->orderBy('products_count', 'desc');
+        } elseif ($sort === 'products_asc') {
+            $query->orderBy('products_count', 'asc');
+        } else {
+            $query->orderBy('name');
+        }
+
+        $categories = $query->paginate(15)->appends($request->query());
+
+        return view('admin.categories.index', compact('categories', 'sort'));
     }
 
     public function create()
@@ -34,8 +48,8 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        $posts = $category->posts()->paginate(15);
-        return view('admin.categories.show', compact('category', 'posts'));
+        $products = $category->products()->paginate(15);
+        return view('admin.categories.show', compact('category', 'products'));
     }
 
     public function edit(Category $category)

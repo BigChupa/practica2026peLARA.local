@@ -190,39 +190,14 @@
     </div>
   </div>
 
-  <div class="row g-4 mb-4">
-    <div class="col-md-6">
-      <div class="card shadow-sm border-0 h-100">
+    <div class="row g-4 mb-4">
+    <div class="col-md-12">
+      <div id="topMonthly" class="card shadow-sm border-0 h-100">
         <div class="card-header bg-light py-3 border-0">
-          <h5 class="card-title mb-0 fw-bold">Топ 5 товарів за весь час</h5>
+          <h5 class="card-title mb-0 fw-bold">Топ 10 товарів за місяць</h5>
         </div>
         <div class="card-body">
-          @if(!empty($topOverall))
-            <ol class="list-group list-group-numbered mb-0">
-              @foreach($topOverall as $item)
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                  <div class="ms-2 me-auto">
-                    <div class="fw-bold">{{ $item['name'] }}</div>
-                    <small class="text-muted">Продано: {{ $item['quantity'] }} шт.</small>
-                  </div>
-                  <span class="badge rounded-pill bg-primary">₴{{ number_format($item['sales'], 2, ',', ' ') }}</span>
-                </li>
-              @endforeach
-            </ol>
-          @else
-            <div class="text-muted">Немає даних за товари.</div>
-          @endif
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="card shadow-sm border-0 h-100">
-        <div class="card-header bg-light py-3 border-0">
-          <h5 class="card-title mb-0 fw-bold">Топ 5 товарів за місяць</h5>
-        </div>
-        <div class="card-body">
-          <form method="GET" action="{{ route('admin.dashboard') }}" class="row g-2 align-items-end mb-4">
+          <form id="top-month-form" method="GET" action="{{ route('admin.dashboard') }}#topMonthly" class="row g-2 align-items-end mb-4">
             <div class="col-6">
               <label class="form-label small">Місяць</label>
               <select name="month" class="form-select form-select-sm">
@@ -239,9 +214,7 @@
                 @endforeach
               </select>
             </div>
-            <div class="col-12 text-end">
-              <button type="submit" class="btn btn-sm btn-primary">Показати</button>
-            </div>
+            <!-- кнопка Показати видалена: форма тепер автоматично підставляється при зміні селектів -->
           </form>
 
           @if(!empty($topMonthly))
@@ -367,7 +340,20 @@
       });
     });
   </script>
-</script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var topForm = document.getElementById('top-month-form');
+      if (topForm) {
+        var selects = topForm.querySelectorAll('select');
+        selects.forEach(function(sel) {
+          sel.addEventListener('change', function() {
+            // submit preserving other query params
+            topForm.submit();
+          });
+        });
+      }
+    });
+  </script>
   <style>
     .hover-shadow {
       transition: box-shadow 0.3s ease;

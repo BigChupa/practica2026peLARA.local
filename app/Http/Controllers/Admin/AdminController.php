@@ -23,15 +23,46 @@ public function verifyStoAppointment($appointmentId)
     return redirect()->route('admin.sto.appointments')->with('success', 'Статус оновлено!');
 }
 
-    public function stoAppointments()
+    public function stoAppointments(Request $request)
     {
-        $toCall = \App\Models\StoAppointment::whereNull('status')
-            ->orWhere('status', 'pending')
+        $search = trim($request->query('search', ''));
+        $searchType = trim($request->query('search_type', ''));
+
+        $baseQuery = \App\Models\StoAppointment::query();
+
+        if ($search !== '') {
+            $baseQuery->where(function ($query) use ($search, $searchType) {
+                if ($searchType === 'name') {
+                    $query->where('name', 'like', "%{$search}%");
+                } elseif ($searchType === 'phone') {
+                    $query->where('phone', 'like', "%{$search}%");
+                } elseif ($searchType === 'service_name') {
+                    $query->where('service_name', 'like', "%{$search}%");
+                } elseif ($searchType === 'notes') {
+                    $query->where('notes', 'like', "%{$search}%");
+                } else {
+                    $query->where('notes', 'like', "%{$search}%")
+                        ->orWhere('name', 'like', "%{$search}%")
+                        ->orWhere('phone', 'like', "%{$search}%")
+                        ->orWhere('service_name', 'like', "%{$search}%")
+                        ->orWhere('appointment_date', 'like', "%{$search}%");
+                }
+            });
+        }
+
+        $toCall = (clone $baseQuery)
+            ->where(function ($query) {
+                $query->whereNull('status')->orWhere('status', 'pending');
+            })
+            ->orderByDesc('appointment_date')
             ->get();
 
-        $called = \App\Models\StoAppointment::where('status', 'confirmed')->get();
+        $called = (clone $baseQuery)
+            ->where('status', 'confirmed')
+            ->orderByDesc('appointment_date')
+            ->get();
 
-        return view('admin.sto_appointments', compact('toCall', 'called'));
+        return view('admin.sto_appointments', compact('toCall', 'called', 'search', 'searchType'));
     }
     public function index(Request $request)
     {
@@ -72,7 +103,7 @@ public function verifyStoAppointment($appointmentId)
             ->select('order_items.product_id', DB::raw('SUM(order_items.quantity) as total_quantity'), DB::raw('SUM(order_items.quantity * order_items.price) as total_sales'))
             ->groupBy('order_items.product_id')
             ->orderByDesc('total_quantity')
-            ->limit(5)
+            ->limit(10)
             ->get();
 
         $topOverall = [];

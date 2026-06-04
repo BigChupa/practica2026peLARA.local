@@ -11,14 +11,35 @@
     </div>
   </div>
 
+  <div class="card mb-3">
+    <div class="card-body">
+      <form action="{{ url()->current() }}" method="GET" class="row g-2 align-items-center">
+        <div class="col-md-3">
+          <select name="search_type" class="form-select">
+            <option value="name" {{ request('search_type', 'name') === 'name' ? 'selected' : '' }}>Пошук за ім'ям</option>
+            <option value="email" {{ request('search_type') === 'email' ? 'selected' : '' }}>Пошук за email</option>
+            <option value="amount" {{ request('search_type') === 'amount' ? 'selected' : '' }}>Пошук за сумою</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <input type="text" name="search" class="form-control" placeholder="Введіть запит..." value="{{ request('search') }}">
+        </div>
+        <div class="col-md-3 d-flex gap-2">
+          <button type="submit" class="btn btn-primary flex-grow-1">Знайти</button>
+          <a href="{{ route('admin.orders.index') }}" class="btn btn-outline-primary flex-grow-1">Скинути</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
   @if($orders->isEmpty())
     <div class="alert alert-info">
       <i class="fas fa-info-circle"></i> Немає замовлень.
     </div>
   @else
     <div class="table-responsive">
-      <table class="table table-hover">
-        <thead class="table-light">
+      <table class="table table-striped table-hover">
+        <thead class="table-dark">
           <tr>
             <th>ID</th>
             <th>Клієнт</th>
@@ -66,7 +87,7 @@
     </div>
 
     <div class="d-flex justify-content-center mt-4">
-      {{ $orders->links('vendor.pagination.simple-custom') }}
+      {{ $orders->appends(['search' => request('search'), 'search_type' => request('search_type')])->links('vendor.pagination.simple-custom') }}
     </div>
   @endif
 </div>

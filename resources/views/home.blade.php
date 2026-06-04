@@ -30,7 +30,7 @@
                 </ul>
             </div>
             <div class="col-md-6">
-                <img src="https://practica2026pelara.local/storage/app/public/image/mechanics.png" alt="Про нас" class="img-fluid rounded">
+                <img src="{{ asset('storage/image/mechanics.png') }}" alt="Про нас" class="img-fluid rounded">
             </div>
         </div>
     </section>
@@ -67,8 +67,8 @@
             <div class="col-md-6 col-lg-3 mb-4">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body text-center">
-                        <h5 class="card-title">💨 Миття</h5>
-                        <p class="card-text">Професійне миття та полірування</p>
+                        <h5 class="card-title">⚙️ Автозапчастини</h5>
+                        <p class="card-text">Оригінальні та якісні автозапчастини</p>
                     </div>
                 </div>
             </div>
@@ -86,11 +86,11 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <h5>📍 Адреса</h5>
-                                <p>вул. Гаврилишина, 15<br>м. Львів, 79000</p>
+                                <p>вул.Артилерійська, 4<br>м. Одеса, 65000</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <h5>📞 Телефон</h5>
-                                <p><a href="tel:+380671234567">+38 067 123 45 67</a></p>
+                                <p><a href="tel:+380503456789">+380 50 345 67 89</a></p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <h5>📧 Email</h5>
@@ -98,7 +98,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <h5>🕐 Час роботи</h5>
-                                <p>Пн-Пт: 09:00 - 18:00<br>Сб: 09:00 - 16:00<br>Нд: вихідний</p>
+                                <p>Пн-Пт: 08:00 - 18:00<br>Сб: 09:00 - 16:00<br>Нд: вихідний</p>
                             </div>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
     <div class="text-center py-5">
         <h3>Готові обслужити ваш автомобіль?</h3>
         <p class="lead">Запишіться на прийом розташунку або пишіть нам</p>
-        <a href="{{ route('services') }}" class="btn btn-custom btn-lg text-white">Зв'язатися</a>
+        <a href="{{ route('services') }}" class="btn btn-custom btn-lg text-white">Запис на СТО</a>
     </div>
 </div>
 @endsection

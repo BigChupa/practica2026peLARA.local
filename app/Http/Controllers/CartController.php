@@ -54,43 +54,62 @@ class CartController extends Controller
     }
 
     public function add(Request $request)
-    {
-        $data = $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'quantity' => 'nullable|integer|min:1'
-        ]);
+{
+    $data = $request->validate([
+        'product_id' => 'required|exists:products,id',
+        'quantity' => 'nullable|integer|min:0'
+    ]);
 
-        $quantity = $data['quantity'] ?? 1;
+    $quantity = $data['quantity'] ?? 1;
+    $product = Product::find($data['product_id']);
 
-        if (Auth::check()) {
-            $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
-
-            $item = $cart->items()->where('product_id', $data['product_id'])->first();
-            if ($item) {
-                $item->quantity = $item->quantity + $quantity;
-                $item->save();
-            } else {
-                $cart->items()->create([
-                    'product_id' => $data['product_id'],
-                    'quantity' => $quantity,
-                ]);
-            }
-        } else {
-            $guest = session('guest_cart', []);
-            if (isset($guest[$data['product_id']])) {
-                $guest[$data['product_id']]['quantity'] = ($guest[$data['product_id']]['quantity'] ?? 0) + $quantity;
-            } else {
-                $guest[$data['product_id']] = ['quantity' => $quantity];
-            }
-            session(['guest_cart' => $guest]);
-        }
-
-        if ($request->wantsJson() || $request->ajax()) {
-            return response()->json(['status' => 'ok']);
-        }
-
-        return back()->with('status', 'Товар додано до кошика');
+    if (!$product) {
+        abort(404);
     }
+
+    if ($quantity > $product->stock_quantity) {
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json(['error' => 'Немає в наявності потрібної кількості товару.'], 422);
+        }
+
+        return back()->withErrors(['quantity' => 'Немає в наявності потрібної кількості товару.']);
+    }
+
+    if (Auth::check()) {
+        $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
+
+        $item = $cart->items()->where('product_id', $data['product_id'])->first();
+        if ($quantity < 1) {
+            if ($item) {
+                $item->delete();
+            }
+        } elseif ($item) {
+            $item->quantity = $quantity;
+            $item->save();
+        } else {
+            $cart->items()->create([
+                'product_id' => $data['product_id'],
+                'quantity' => $quantity,
+            ]);
+        }
+    } else {
+        $guest = session('guest_cart', []);
+
+        if ($quantity < 1) {
+            unset($guest[$data['product_id']]);
+        } else {
+            $guest[$data['product_id']] = ['quantity' => $quantity];
+        }
+
+        session(['guest_cart' => $guest]);
+    }
+
+    if ($request->wantsJson() || $request->ajax()) {
+        return response()->json(['status' => 'ok']);
+    }
+
+    return back()->with('status', 'Товар додано до кошика');
+}
 
     public function remove(Request $request)
     {
@@ -120,20 +139,42 @@ class CartController extends Controller
     {
         $data = $request->validate([
             'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|integer|min:1'
+            'quantity' => 'required|integer|min:0'
         ]);
+
+        $product = Product::find($data['product_id']);
+
+        if (!$product) {
+            abort(404);
+        }
+
+        if ($data['quantity'] > $product->stock_quantity) {
+            if ($request->wantsJson() || $request->ajax()) {
+                return response()->json(['error' => 'Немає в наявності потрібної кількості товару.'], 422);
+            }
+
+            return back()->withErrors(['quantity' => 'Немає в наявності потрібної кількості товару.']);
+        }
 
         if (Auth::check()) {
             $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
             $item = $cart->items()->where('product_id', $data['product_id'])->first();
             if ($item) {
-                $item->quantity = $data['quantity'];
-                $item->save();
+                if ($data['quantity'] < 1) {
+                    $item->delete();
+                } else {
+                    $item->quantity = $data['quantity'];
+                    $item->save();
+                }
             }
         } else {
             $guest = session('guest_cart', []);
             if (isset($guest[$data['product_id']])) {
-                $guest[$data['product_id']]['quantity'] = $data['quantity'];
+                if ($data['quantity'] < 1) {
+                    unset($guest[$data['product_id']]);
+                } else {
+                    $guest[$data['product_id']]['quantity'] = $data['quantity'];
+                }
                 session(['guest_cart' => $guest]);
             }
         }

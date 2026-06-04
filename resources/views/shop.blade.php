@@ -2,6 +2,21 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .product-card {
+        cursor: pointer;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+    .product-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.12);
+        border-color: rgba(13, 110, 253, 0.25);
+    }
+    .product-card button,
+    .product-card a {
+        cursor: pointer;
+    }
+</style>
 <div class="hero">
     <div class="container">
         <h1>Магазин запчастин</h1>
@@ -86,7 +101,7 @@
                 <div class="row">
                     @forelse($products as $product)
                         <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card h-100 shadow-sm">
+                            <div class="card product-card h-100 shadow-sm" data-href="{{ route('shop.product.show', $product) }}">
                                 @if($product->image_path)
                                     <img src="{{ asset('storage/' . $product->image_path) }}" class="card-img-top" alt="{{ $product->name }}">
                                 @else
@@ -95,16 +110,20 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $product->name }}</h5>
                                     <p class="card-text">{{ Str::limit($product->description, 100) }}</p>
-                                    <p class="text-danger"><strong>₴ {{ number_format($product->price, 2, ',', ' ') }}</strong></p>
+                                    @if($product->stock_quantity < 1)
+                                        <p class="text-danger mb-0"><strong>Немає в наявності</strong></p>
+                                    @else
+                                        <p class="text-danger"><strong>₴ {{ number_format($product->price, 2, ',', ' ') }}</strong></p>
+                                    @endif
                                 </div>
                                 <div class="card-footer bg-white">
-                                    <div class="cart-controls" data-product-id="{{ $product->id }}">
-                                        <button class="btn btn-outline-primary btn-sm add-to-cart w-100">Додати до кошика</button>
+                                    <div class="cart-controls" data-product-id="{{ $product->id }}" data-stock-quantity="{{ max(0, $product->stock_quantity) }}">
+                                        <button class="btn btn-outline-primary btn-sm add-to-cart w-100" @if($product->stock_quantity < 1) disabled @endif>Додати до кошика</button>
                                         <a href="{{ route('cart.index') }}" class="btn btn-success btn-sm go-to-cart w-100 mt-2 d-none">Перейти до кошика</a>
                                         <div class="d-none qty-controls mt-2">
                                             <div class="input-group">
                                                 <button class="btn btn-sm btn-outline-secondary decrement" type="button">−</button>
-                                                <input type="text" class="form-control form-control-sm text-center qty" value="1" readonly>
+                                                <input type="number" min="1" class="form-control form-control-sm text-center qty" value="1" step="1">
                                                 <button class="btn btn-sm btn-outline-secondary increment" type="button">+</button>
                                             </div>
                                             <button class="btn btn-danger btn-sm mt-2 remove-item w-100">Видалити</button>
@@ -152,42 +171,92 @@
 <script>
 document.addEventListener('DOMContentLoaded', function(){
     const CART_KEY = 'local_cart_v1';
+    const SERVER_CART_QUANTITIES = @json($cartQuantities ?? []);
     const IS_AUTH = @json(auth()->check());
     const CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
-    function readCart(){
-        try { return JSON.parse(localStorage.getItem(CART_KEY)) || {}; } catch(e) { return {}; }
+    function readCart() {
+        try {
+            return JSON.parse(localStorage.getItem(CART_KEY)) || {};
+        } catch (e) {
+            return {};
+        }
     }
-    function writeCart(cart){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
 
-    function updateControls(container, productId){
+    function writeCart(cart) {
+        localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    }
+
+    function syncLocalStorageWithServer() {
+        const localCart = readCart();
+
+        Object.keys(SERVER_CART_QUANTITIES).forEach(productId => {
+            const qty = parseInt(SERVER_CART_QUANTITIES[productId]);
+            if (qty > 0) {
+                localCart[productId] = { quantity: qty };
+            }
+        });
+
+        if (IS_AUTH) {
+            Object.keys(localCart).forEach(productId => {
+                if (!SERVER_CART_QUANTITIES[productId]) {
+                    delete localCart[productId];
+                }
+            });
+        }
+
+        writeCart(localCart);
+    }
+
+    syncLocalStorageWithServer();
+
+    function updateControls(container, productId, stockQuantity) {
         const cart = readCart();
         const item = cart[productId];
         const addBtn = container.querySelector('.add-to-cart');
         const goBtn = container.querySelector('.go-to-cart');
         const qtyBox = container.querySelector('.qty-controls');
         const qtyInput = container.querySelector('.qty');
-        if(item){
+
+        if (addBtn) {
+            addBtn.disabled = stockQuantity < 1;
+        }
+
+        if (item) {
+            const quantity = Math.max(1, Math.min(stockQuantity, item.quantity || 1));
+            cart[productId].quantity = quantity;
+            writeCart(cart);
+
             addBtn.classList.add('d-none');
-            if(goBtn) goBtn.classList.remove('d-none');
+            if (goBtn) goBtn.classList.remove('d-none');
             qtyBox.classList.remove('d-none');
-            qtyInput.value = item.quantity;
+            qtyInput.value = quantity;
+            qtyInput.max = stockQuantity;
         } else {
             addBtn.classList.remove('d-none');
-            if(goBtn) goBtn.classList.add('d-none');
+            if (goBtn) goBtn.classList.add('d-none');
             qtyBox.classList.add('d-none');
+            if (qtyInput) {
+                qtyInput.value = 1;
+                qtyInput.max = stockQuantity;
+            }
         }
     }
 
     document.querySelectorAll('.cart-controls').forEach(function(container){
         const productId = container.getAttribute('data-product-id');
-        updateControls(container, productId);
+        const stockQuantity = Math.max(0, parseInt(container.getAttribute('data-stock-quantity'), 10) || 0);
+        const qtyInput = container.querySelector('.qty');
+
+        updateControls(container, productId, stockQuantity);
 
         container.querySelector('.add-to-cart')?.addEventListener('click', function(){
+            if (stockQuantity < 1) return;
             const cart = readCart();
             cart[productId] = { quantity: 1 };
             writeCart(cart);
-            if(IS_AUTH){
+
+            if (IS_AUTH) {
                 fetch("{{ route('cart.add') }}", {
                     method: 'POST',
                     headers: {
@@ -196,17 +265,19 @@ document.addEventListener('DOMContentLoaded', function(){
                         'Accept': 'application/json'
                     },
                     body: JSON.stringify({ product_id: productId, quantity: 1 })
-                }).catch(()=>{});
+                }).catch(() => {});
             }
-            updateControls(container, productId);
+
+            updateControls(container, productId, stockQuantity);
         });
 
         container.querySelector('.increment')?.addEventListener('click', function(){
             const cart = readCart();
-            if(!cart[productId]) cart[productId] = { quantity: 0 };
-            cart[productId].quantity = (cart[productId].quantity || 0) + 1;
+            if (!cart[productId]) cart[productId] = { quantity: 0 };
+            cart[productId].quantity = Math.min(stockQuantity, (cart[productId].quantity || 0) + 1);
             writeCart(cart);
-            if(IS_AUTH){
+
+            if (IS_AUTH) {
                 fetch("{{ route('cart.add') }}", {
                     method: 'POST',
                     headers: {
@@ -215,17 +286,19 @@ document.addEventListener('DOMContentLoaded', function(){
                         'Accept': 'application/json'
                     },
                     body: JSON.stringify({ product_id: productId, quantity: cart[productId].quantity })
-                }).catch(()=>{});
+                }).catch(() => {});
             }
-            updateControls(container, productId);
+
+            updateControls(container, productId, stockQuantity);
         });
 
         container.querySelector('.decrement')?.addEventListener('click', function(){
             const cart = readCart();
-            if(!cart[productId]) return;
+            if (!cart[productId]) return;
             cart[productId].quantity = Math.max(1, (cart[productId].quantity || 1) - 1);
             writeCart(cart);
-            if(IS_AUTH){
+
+            if (IS_AUTH) {
                 fetch("{{ route('cart.update') }}", {
                     method: 'POST',
                     headers: {
@@ -234,16 +307,45 @@ document.addEventListener('DOMContentLoaded', function(){
                         'Accept': 'application/json'
                     },
                     body: JSON.stringify({ product_id: productId, quantity: cart[productId].quantity })
-                }).catch(()=>{});
+                }).catch(() => {});
             }
-            updateControls(container, productId);
+
+            updateControls(container, productId, stockQuantity);
+        });
+
+        qtyInput?.addEventListener('change', function(){
+            let inputQuantity = parseInt(qtyInput.value, 10);
+            if (isNaN(inputQuantity)) {
+                inputQuantity = 1;
+            }
+            inputQuantity = Math.max(1, Math.min(stockQuantity, inputQuantity));
+            qtyInput.value = inputQuantity;
+
+            const cart = readCart();
+            cart[productId] = { quantity: inputQuantity };
+            writeCart(cart);
+
+            if (IS_AUTH) {
+                fetch("{{ route('cart.update') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': CSRF_TOKEN,
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ product_id: productId, quantity: inputQuantity })
+                }).catch(() => {});
+            }
+
+            updateControls(container, productId, stockQuantity);
         });
 
         container.querySelector('.remove-item')?.addEventListener('click', function(){
             const cart = readCart();
             delete cart[productId];
             writeCart(cart);
-            if(IS_AUTH){
+
+            if (IS_AUTH) {
                 fetch("{{ route('cart.remove') }}", {
                     method: 'POST',
                     headers: {
@@ -252,13 +354,14 @@ document.addEventListener('DOMContentLoaded', function(){
                         'Accept': 'application/json'
                     },
                     body: JSON.stringify({ product_id: productId })
-                }).catch(()=>{});
+                }).catch(() => {});
             }
-            updateControls(container, productId);
+
+            updateControls(container, productId, stockQuantity);
         });
 
         container.querySelector('.go-to-cart')?.addEventListener('click', function(e){
-            if(IS_AUTH) return; 
+            if (IS_AUTH) return;
             e.preventDefault();
             const cart = readCart();
             const href = container.querySelector('.go-to-cart').href;
@@ -281,7 +384,7 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 
     document.getElementById('top-cart-link')?.addEventListener('click', function(e){
-        if(IS_AUTH) return;
+        if (IS_AUTH) return;
         e.preventDefault();
         const cart = readCart();
         const href = e.currentTarget.href;
@@ -302,14 +405,19 @@ document.addEventListener('DOMContentLoaded', function(){
         setTimeout(function(){ window.location.href = href; }, 400);
     });
 
-    // Фільтр по марке/модели/году (Cascading selects)
+    document.querySelectorAll('.product-card').forEach(function(card){
+        card.addEventListener('click', function(e){
+            if (e.target.closest('a, button, input, select, textarea, label')) return;
+            window.location.href = card.dataset.href;
+        });
+    });
+
     const carMakeSelect = document.getElementById('car-make');
     const carModelSelect = document.getElementById('car-model');
     const carYearSelect = document.getElementById('car-year');
     const modelSelectWrapper = document.getElementById('model-select-wrapper');
     const yearSelectWrapper = document.getElementById('year-select-wrapper');
 
-    // Инициализация при загрузке страницы
     if (carMakeSelect && carMakeSelect.value) {
         loadModels(carMakeSelect.value);
     }
@@ -317,7 +425,6 @@ document.addEventListener('DOMContentLoaded', function(){
         loadYears(carMakeSelect.value, carModelSelect.value);
     }
 
-    // Обработчик изменения марки
     carMakeSelect?.addEventListener('change', function() {
         if (!this.value) {
             carModelSelect.innerHTML = '<option value="">-- Виберіть модель --</option>';
@@ -326,18 +433,15 @@ document.addEventListener('DOMContentLoaded', function(){
             yearSelectWrapper.style.display = 'none';
             return;
         }
-
         loadModels(this.value);
     });
 
-    // Обработчик изменения модели
     carModelSelect?.addEventListener('change', function() {
         if (!this.value || !carMakeSelect.value) {
             carYearSelect.innerHTML = '<option value="">-- Виберіть рік --</option>';
             yearSelectWrapper.style.display = 'none';
             return;
         }
-
         loadYears(carMakeSelect.value, this.value);
     });
 
@@ -356,8 +460,6 @@ document.addEventListener('DOMContentLoaded', function(){
                     carModelSelect.appendChild(option);
                 });
                 modelSelectWrapper.style.display = 'block';
-                
-                // Якщо була вибрана модель, завантажити роки
                 if (carModelSelect.value) {
                     loadYears(make, carModelSelect.value);
                 }

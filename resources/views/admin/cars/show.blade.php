@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-5">
     <div class="row mb-4">
         <div class="col-md-8">
             <h2>{{ $car->make }} {{ $car->model }} ({{ $car->year }})</h2>
@@ -54,8 +54,8 @@
                 <div class="card-body">
                     @if($car->products->count())
                         <div class="table-responsive">
-                            <table class="table table-sm table-striped">
-                                <thead>
+                            <table class="table table-sm table-striped table-hover">
+                                <thead class="table-dark">
                                     <tr>
                                         <th>Назва</th>
                                         <th>SKU</th>

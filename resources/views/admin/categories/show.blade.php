@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mt-5">
     <div class="row mb-4">
         <div class="col-md-8">
             <h2>{{ $category->name }}</h2>
@@ -24,29 +24,40 @@
         </div>
     </div>
 
-    <h4>Пости в цій категорії ({{ $posts->total() }})</h4>
+    <h4>Товари в цій категорії ({{ $products->total() }})</h4>
     
-    @if ($posts->count())
-        <div class="row">
-            @foreach ($posts as $post)
-                <div class="col-md-12 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $post->title }}</h5>
-                            <p class="card-text text-muted small">
-                                Автор: <strong>{{ $post->user->name }}</strong> |
-                                Створено: {{ $post->created_at->format('d.m.Y H:i') }}
-                            </p>
-                            <p class="card-text">{{ Str::limit($post->content, 100) }}</p>
-                            <a href="{{ route('admin.posts.show', $post) }}" class="btn btn-sm btn-info">Переглянути</a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+    @if ($products->count())
+        <div class="table-responsive">
+            <table class="table table-sm table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Назва</th>
+                        <th>SKU</th>
+                        <th>Ціна</th>
+                        <th>Залишок</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($products as $product)
+                        <tr>
+                            <td><strong>{{ $product->name }}</strong></td>
+                            <td><code>{{ $product->sku }}</code></td>
+                            <td>₴ {{ number_format($product->price, 2) }}</td>
+                            <td>{{ $product->stock_quantity }}</td>
+                            <td>
+                                <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-sm btn-info">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-        {{ $posts->links() }}
+        {{ $products->links('vendor.pagination.simple-custom') }}
     @else
-        <div class="alert alert-info">Постів в цій категорії немає</div>
+        <div class="alert alert-info">Товарів в цій категорії немає</div>
     @endif
 </div>
 @endsection

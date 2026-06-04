@@ -11,10 +11,40 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('category')->orderBy('id', 'desc')->paginate(15);
-        return view('admin.products.index', compact('products'));
+        $query = Product::with('category');
+        $searchType = $request->query('search_type', 'name');
+        $sort = $request->query('sort');
+
+        if ($sort === 'price_asc') {
+            $query->orderBy('price', 'asc');
+        } elseif ($sort === 'price_desc') {
+            $query->orderBy('price', 'desc');
+        } elseif ($sort === 'stock_asc') {
+            $query->orderBy('stock_quantity', 'asc');
+        } elseif ($sort === 'stock_desc') {
+            $query->orderBy('stock_quantity', 'desc');
+        } else {
+            $query->orderBy('id', 'asc');
+        }
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+
+            if ($searchType === 'price') {
+                if (is_numeric($search)) {
+                    $query->where('price', $search);
+                } else {
+                    $query->where('price', 'like', '%' . $search . '%');
+                }
+            } else {
+                $query->where('name', 'like', '%' . $search . '%');
+            }
+        }
+
+        $products = $query->paginate(15);
+        return view('admin.products.index', compact('products', 'searchType', 'sort'));
     }
 
     public function create()
@@ -22,6 +52,12 @@ class ProductController extends Controller
         $categories = Category::all();
         $cars = Car::orderBy('make')->orderBy('model')->get();
         return view('admin.products.create', compact('categories', 'cars'));
+    }
+
+    public function show(Product $product)
+    {
+        $product->load(['category', 'car']);
+        return view('admin.products.show', compact('product'));
     }
 
     public function store(Request $request)
@@ -39,7 +75,6 @@ class ProductController extends Controller
         $data['sku'] = 'AP-' . strtoupper(Str::random(2)) . '-' . rand(10000, 99999);
         $data['stock_quantity'] = $data['stock_quantity'] ?? 0;
 
-        // Если выбран автомобиль, заполнить совместимость
         if (!empty($data['car_id'])) {
             $car = Car::find($data['car_id']);
             if ($car) {
